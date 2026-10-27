@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Exchange | Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f9f5;
+            color: #252044;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 15px rgba(40, 25, 90, 0.07);
+        }
+
+        .logo {
+            color: #238636;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #514b6d;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #238636;
+        }
+
+        .hero {
+            margin: 45px auto 30px;
+            width: 84%;
+            max-width: 1100px;
+            padding: 48px;
+            border-radius: 24px;
+            color: white;
+            background: linear-gradient(120deg, #196c2e, #52a866);
+        }
+
+        .hero p {
+            margin-top: 12px;
+            line-height: 1.7;
+            color: #effaf0;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+        }
+
+        .container {
+            width: 84%;
+            max-width: 1100px;
+            margin: 0 auto 50px;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(40, 25, 90, 0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 28px rgba(40, 25, 90, 0.12);
+        }
+
+        .emoji {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #77718e;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #238636;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #196c2e;
+        }
+
+        .logout {
+            background: #e8f5e9;
+            color: #238636;
+        }
+
+        .logout:hover {
+            background: #d5ead8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: #89839f;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 16px 5%;
+                flex-wrap: wrap;
+                gap: 14px;
+            }
+
+            .hero {
+                width: 90%;
+                padding: 30px 24px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Skill Exchange ✦</div>
+
+        
+<div class="nav-links">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('skills') }}">My Skills</a>
+    <a href="{{ url_for('profile') }}">My Profile</a>
+
+
+            <form method="POST" action="{{ url_for('logout') }}">
+                <button class="btn logout" type="submit">Logout</button>
+            </form>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Welcome, {{ name }}! 👋</h1>
+        <p>
+            Everyone has a skill worth sharing.<br>
+            Teach what you know, learn what you love,
+            and grow together with your student community.
+        </p>
+    </section>
+
+<p style="text-align: right; margin-bottom: 20px;">
+    <a href="{{ url_for('browse_skills') }}"
+       style="color: #238636; font-weight: 700; text-decoration: none;">
+        🔎 Browse Skills →
+    </a>
+</p>
+
+    <main class="container">
+        <h2 class="section-title">Your Learning Space</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="emoji">🎯</div>
+                <h3>Skills I Can Teach</h3>
+                <p>Share your knowledge and help other students develop new abilities.</p>
+                <a class="btn" href="{{ url_for('skills') }}">Add a Skill</a>
+            </div>
+
+            <div class="card">
+                <div class="emoji">📚</div>
+                <h3>Skills I Want to Learn</h3>
+                <p>List the skills you want to learn and work towards your goals.</p>
+                <a class="btn" href="{{ url_for('skills') }}">Explore Skills</a>
+            </div>
+
+            <div class="card">
+                <div class="emoji">🤝</div>
+                <h3>Connect & Exchange</h3>
+                <p>Build a community where students learn from one another.</p>
+                <a class="btn" href="{{ url_for('skills') }}">Get Started</a>
+            </div>
+
+            <div class="card">
+    <div class="emoji">📩</div>
+    <h3>Exchange Requests</h3>
+    <p>View requests from other students and accept or reject them.</p>
+    <a class="btn" href="{{ url_for('requests_page') }}">
+        View Requests
+    </a>
+</div>
+        </div>
+    </main>
+
+    <footer>
+        Skill Exchange · Learn Together, Grow Together
+    </footer>
+
+</body>
+</html>

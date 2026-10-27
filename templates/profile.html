@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Skill Exchange</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .profile-card {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(35, 134, 54, 0.10);
+        }
+        .profile-card h1 {
+            color: #238636;
+            margin-bottom: 25px;
+        }
+        .profile-detail {
+            padding: 15px 0;
+            border-bottom: 1px solid #dce8de;
+        }
+        .profile-detail strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #238636;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <h1>My Profile</h1>
+
+        <div class="profile-detail">
+            <strong>Student Name</strong>
+            {{ user["name"] }}
+        </div>
+
+        <div class="profile-detail">
+            <strong>Email Address</strong>
+            {{ user["email"] }}
+        </div>
+
+        <div class="profile-detail">
+            <strong>Student ID</strong>
+            {{ user["id"] }}
+        </div>
+
+        <a class="back-link" href="/dashboard">← Back to Dashboard</a>
+    </div>
+</body>
+</html>

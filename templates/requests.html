@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exchange Requests</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f1ff;
+            margin: 0;
+            padding: 30px;
+            color: #30264a;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .request-card {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        button {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            margin: 8px 6px 0 0;
+        }
+
+        .accept {
+            background: #d9f5df;
+            color: #176b31;
+        }
+
+        .reject {
+            background: #ffe0e0;
+            color: #a32121;
+        }
+
+        a {
+            color: #6842a6;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Incoming Exchange Requests</h1>
+        <p>Hello, {{ name }}!</p>
+
+        <p><a href="{{ url_for('dashboard') }}">← Back to Dashboard</a></p>
+
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        {% if requests %}
+            {% for req in requests %}
+                <div class="request-card">
+                    <h3>{{ req["skill_name"] }}</h3>
+                    <p>Requested by: {{ req["sender_name"] }}</p>
+                    <p>Status: <strong>{{ req["status"]|title }}</strong></p>
+
+                    {% if req["status"] == "pending" %}
+                        <form method="POST"
+                              action="{{ url_for('respond_request', request_id=req['id'], action='accepted') }}"
+                              style="display: inline;">
+                            <button class="accept" type="submit">Accept</button>
+                        </form>
+
+                        <form method="POST"
+                              action="{{ url_for('respond_request', request_id=req['id'], action='rejected') }}"
+                              style="display: inline;">
+                            <button class="reject" type="submit">Reject</button>
+                        </form>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You have no exchange requests yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

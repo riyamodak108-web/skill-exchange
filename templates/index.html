@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap | Student Skill Exchange</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+            
+        body
+             {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #172033;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 8%;
+            background: white;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: #5b4bdb;
+        }
+
+        
+nav a {
+    text-decoration: none;
+    color: #334155;
+    margin-left: 22px;
+}
+
+nav .nav-button {
+    background: #5b4bdb;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+        
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px 80px;
+            background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+        }
+
+        .tag {
+            color: #5b4bdb;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: clamp(36px, 5vw, 58px);
+            max-width: 800px;
+            margin: 20px auto;
+            line-height: 1.15;
+        }
+
+        .hero p {
+            color: #64748b;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #5b4bdb;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .features {
+            padding: 55px 8%;
+            text-align: center;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            margin-top: 32px;
+            text-align: left;
+        }
+
+        .card {
+            background: white;
+            padding: 26px;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+        }
+
+        .card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    
+<nav>
+    <div class="logo">SkillSwap</div>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="#features">Features</a>
+        <a href="/register" class="nav-button">Create Account</a>
+    </div>
+</nav>
+
+
+    <section class="hero">
+        <div class="tag">YOUR SKILLS HAVE VALUE</div>
+
+        <h1>Learn together. Grow together.</h1>
+
+        <p>
+            Connect with fellow students, share what you know,
+            and discover new skills — all through peer-to-peer learning.
+        </p>
+
+        <a class="btn" href="#features">Explore SkillSwap →</a>
+    </section>
+
+    <section class="features" id="features">
+        <h2>A community built on sharing</h2>
+        <p>Everyone has something to teach and something to learn.</p>
+
+        <div class="cards">
+            <div class="card">
+                <h3>🎯 Share Your Skills</h3>
+                <p>Show other students what you can teach, from Python to graphic design.</p>
+            </div>
+
+            <div class="card">
+                <h3>🤝 Find Your Match</h3>
+                <p>Discover students whose skills match what you want to learn.</p>
+            </div>
+
+            <div class="card">
+                <h3>📚 Learn Together</h3>
+                <p>Build knowledge, collaborate, and help each other improve.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        SkillSwap · Built for students, by students.
+    </footer>
+</body>
+</html>

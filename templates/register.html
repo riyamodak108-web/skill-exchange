@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Skill Exchange</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f3ff, #e9ddff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            color: #252044;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            padding: 38px 40px;
+            border-radius: 24px;
+            box-shadow: 0 15px 45px rgba(83, 54, 160, 0.13);
+        }
+
+        .logo {
+            text-align: center;
+            color: #6d45d8;
+            font-size: 25px;
+            font-weight: 800;
+            margin-bottom: 26px;
+        }
+
+        .icon {
+            width: 66px;
+            height: 66px;
+            background: #f0ebff;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #858099;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 26px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #ded9ec;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: #8059e8;
+            box-shadow: 0 0 0 3px rgba(128, 89, 232, 0.13);
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            background: #6d45d8;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: background 0.2s;
+        }
+
+        .register-btn:hover {
+            background: #5632bd;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 9px;
+            margin-bottom: 18px;
+            font-size: 14px;
+            text-align: center;
+            background: #f0ebff;
+            color: #5632bd;
+        }
+
+        .login-link {
+            text-align: center;
+            color: #77718e;
+            font-size: 14px;
+            margin-top: 24px;
+        }
+
+        .login-link a {
+            color: #6d45d8;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #858099;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #6d45d8;
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 30px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <div class="logo">Skill Exchange ✦</div>
+
+        <div class="icon">✨</div>
+
+        <h1>Create Account</h1>
+
+        <p class="subtitle">
+            Join your student community, share your skills,
+            and discover something new.
+        </p>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('register') }}">
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="register-btn">
+                Create My Account →
+            </button>
+
+        </form>
+
+        <p class="login-link">
+            Already have an account?
+            <a href="{{ url_for('login') }}">Log In</a>
+        </p>
+
+        <a class="back-link" href="{{ url_for('home') }}">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</body>
+</html>
