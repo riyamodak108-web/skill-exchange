@@ -155,14 +155,96 @@ def profile():
 
     conn = get_db_connection()
 
+    user = conn.execute(    
+        "SELECT * FROM users WHERE id = ?",
+        (session["user_id"],)
+    ).fetchone()
+
+    total_skills = conn.execute(
+        "SELECT COUNT(*) AS count FROM skills WHERE user_id = ?",
+        (session["user_id"],)
+    ).fetchone()["count"]
+
+    teaching_skills = conn.execute(
+        """
+        SELECT COUNT(*) AS count
+        FROM skills
+        WHERE user_id = ? AND skill_type = 'teach'
+        """,
+        (session["user_id"],)
+    ).fetchone()["count"]
+
+    learning_skills = conn.execute(
+        """
+        SELECT COUNT(*) AS count
+        FROM skills
+        WHERE user_id = ? AND skill_type = 'learn'
+        """,
+        (session["user_id"],)
+    ).fetchone()["count"]
+
+    conn.close()
+
+    return render_template(
+        "profile.html",
+        user=user,
+        total_skills=total_skills,
+        teaching_skills=teaching_skills,
+        learning_skills=learning_skills
+    )
+
+
+@app.route("/edit-profile", methods=["GET", "POST"])
+def edit_profile():
+    if "user_id" not in session:
+        return redirect("/login")
+
+    conn = get_db_connection()
+
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+
+        if not name or not email:
+            user = conn.execute(
+                "SELECT * FROM users WHERE id = ?",
+                (session["user_id"],)
+            ).fetchone()
+            conn.close()
+            return render_template(
+                "edit_profile.html",
+                user=user,
+                error="Name and email are required."
+            )
+
+        try:
+            conn.execute(
+                "UPDATE users SET name = ?, email = ? WHERE id = ?",
+                (name, email, session["user_id"])
+            )
+            conn.commit()
+        except sqlite3.IntegrityError:
+            user = conn.execute(
+                "SELECT * FROM users WHERE id = ?",
+                (session["user_id"],)
+            ).fetchone()
+            conn.close()
+            return render_template(
+                "edit_profile.html",
+                user=user,
+                error="That email address is already registered."
+            )
+
+        conn.close()
+        return redirect("/profile")
+
     user = conn.execute(
         "SELECT * FROM users WHERE id = ?",
         (session["user_id"],)
     ).fetchone()
 
     conn.close()
-
-    return render_template("profile.html", user=user)
+    return render_template("edit_profile.html", user=user)
 
 
 @app.route("/browse")

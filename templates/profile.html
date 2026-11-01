@@ -1,59 +1,109 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile | Skill Exchange</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        .profile-card {
-            max-width: 600px;
-            margin: 60px auto;
-            padding: 35px;
-            background: white;
-            border-radius: 18px;
-            box-shadow: 0 5px 20px rgba(35, 134, 54, 0.10);
-        }
-        .profile-card h1 {
-            color: #238636;
-            margin-bottom: 25px;
-        }
-        .profile-detail {
-            padding: 15px 0;
-            border-bottom: 1px solid #dce8de;
-        }
-        .profile-detail strong {
-            display: block;
-            margin-bottom: 6px;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 25px;
-            color: #238636;
-        }
-    </style>
-</head>
-<body>
-    <div class="profile-card">
-        <h1>My Profile</h1>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Profile | Skill Exchange</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <style>
+            .profile-card {
+                max-width: 600px;
+                margin: 60px auto;
+                padding: 35px;
+                background: white;
+                border-radius: 18px;
+                box-shadow: 0 5px 20px rgba(35, 134, 54, 0.10);
+            }
+            .profile-card h1 {
+                color: #238636;
+                margin-bottom: 25px;
+            }
+            .profile-detail {
+                padding: 15px 0;
+                border-bottom: 1px solid #dce8de;
+            }
+            .profile-detail strong {
+                display: block;
+                margin-bottom: 6px;
+            }
+            .back-link {
+                display: inline-block;
+                margin-top: 25px;
+                color: #238636;
+            }
 
-        <div class="profile-detail">
-            <strong>Student Name</strong>
-            {{ user["name"] }}
-        </div>
+            .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
 
-        <div class="profile-detail">
-            <strong>Email Address</strong>
-            {{ user["email"] }}
-        </div>
+.stat-box {
+    text-align: center;
+    padding: 20px 10px;
+    background: #e8f5e9;
+    border-radius: 14px;
+    border: 1px solid #c8e6c9;
+}
 
-        <div class="profile-detail">
-            <strong>Student ID</strong>
-            {{ user["id"] }}
-        </div>
+.stat-box span {
+    display: block;
+    font-size: 28px;
+    font-weight: 800;
+    color: #238636;
+}
 
-        <a class="back-link" href="/dashboard">← Back to Dashboard</a>
+.stat-box p {
+    margin-top: 5px;
+    color: #555;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}
+        </style>
+    </head>
+    <body>
+        <div class="profile-card">
+            <h1>My Profile</h1>
+            <div class="stats">
+    <div class="stat-box">
+        <span>{{ total_skills }}</span>
+        <p>Total Skills</p>
     </div>
-</body>
-</html>
+
+    <div class="stat-box">
+        <span>{{ teaching_skills }}</span>
+        <p>Can Teach</p>
+    </div>
+
+    <div class="stat-box">
+        <span>{{ learning_skills }}</span>
+        <p>Want to Learn</p>
+    </div>
+</div>
+
+            <div class="profile-detail">
+                <strong>Student Name</strong>
+                {{ user["name"] }}
+            </div>
+
+            <div class="profile-detail">
+                <strong>Email Address</strong>
+                {{ user["email"] }}
+            </div>
+
+            <div class="profile-detail">
+                <strong>Student ID</strong>
+                {{ user["id"] }}
+            </div>
+            <a href="/edit-profile" class="btn">Edit Profile</a>
+            <a class="back-link" href="/dashboard">← Back to Dashboard</a>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile | Skill Exchange</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .edit-card {
+            max-width: 550px;
+            margin: 50px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(35, 134, 54, 0.10);
+        }
+        .edit-card h1 {
+            color: #238636;
+            margin-bottom: 25px;
+        }
+        .edit-card label {
+            display: block;
+            margin: 18px 0 8px;
+            font-weight: 600;
+        }
+        .edit-card input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dce8de;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .error {
+            color: #c03939;
+            margin-bottom: 15px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-left: 12px;
+            color: #238636;
+        }
+    </style>
+</head>
+<body>
+    <div class="edit-card">
+        <h1>Edit Profile</h1>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <label for="name">Student Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ user['name'] }}"
+                required
+            >
+
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="{{ user['email'] }}"
+                required
+            >
+
+            <button class="btn" type="submit" style="margin-top: 22px;">
+                Save Changes
+            </button>
+
+            <a href="/profile" class="back-link">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
+    
